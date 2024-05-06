@@ -1,0 +1,46 @@
+class Graph:
+    def __init__(self):
+        self.graph={}
+    
+    def add_edge(self,node,neighbor):
+        if node not in self.graph:
+            self.graph[node]=[]
+        self.graph[node].append(neighbor)
+            
+    def bfs_recursive(self,queue,visited):
+        if not queue:
+            return
+        current_node=queue.pop(0)
+        print(current_node,end="")
+        visited.add(current_node)
+        for neighbor in self.graph[current_node]:
+            if neighbor not in visited:
+                queue.append(neighbor)
+                visited.add(neighbor)
+        self.bfs_recursive(queue,visited)
+        
+        
+    def dfs_recursive(self,node,visited):
+        if node not in visited:
+            print(node,end="")
+            visited.add(node)
+            for neighbor in self.graph[node]:
+               self.dfs_recursive(neighbor,visited)
+            
+            
+graph=Graph()
+    
+graph.add_edge(0,1)
+graph.add_edge(0,2)
+graph.add_edge(1,2)
+graph.add_edge(2,0)
+graph.add_edge(2,3)
+graph.add_edge(3,3)
+        
+    
+print("bfs is:")
+graph.bfs_recursive([0],set())
+    
+    
+print("dfs is:")
+graph.dfs_recursive(2,set())    

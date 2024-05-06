@@ -1,0 +1,29 @@
+class PerformanceEvaluationSystem:
+    def __init__(self):
+        self.criteria = {
+        "Productivity": {"Poor": 0, "Satisfactory": 1, "Good": 2, "Excellent": 3},
+    "QualityOfWork": {"Poor": 0, "Satisfactory": 1, "Good": 2, "Excellent": 3},}
+ 
+    def evaluate_performance(self, employee_data):
+        performance_scores = {}
+        for criterion, levels in self.criteria.items():
+            score = self.evaluate_criterion(employee_data, criterion, levels)
+            performance_scores[criterion] = score
+        return performance_scores
+ 
+    def evaluate_criterion(self, employee_data, criterion, levels):
+       return sum(employee_data.get(criterion, {}).values()) / len(levels)
+ 
+    def print_evaluation_report(self, performance_scores):
+        print("Performance Evaluation Report:")
+        for criterion, score in performance_scores.items():
+            print(f"{criterion}: {score}")
+    
+if __name__ == "__main__":
+            evaluation_system = PerformanceEvaluationSystem()
+            employee_data = {
+            "Productivity": {"MeetDeadlines": 3, "TasksCompleted": 2},
+            "QualityOfWork": {"Accuracy": 3, "AttentionToDetail": 3}
+            }
+            performance_scores = evaluation_system.evaluate_performance(employee_data)
+            evaluation_system.print_evaluation_report(performance_scores)
